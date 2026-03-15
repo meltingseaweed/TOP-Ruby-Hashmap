@@ -16,7 +16,6 @@ class HashMap
   end
 
   def set(key, value)
-    # Add function to check need to grow load size and do if necessary
     hash_code = hash(key)
     bucket = hash_code % @@capacity
     @@hasharray[bucket] << { key => value }
@@ -24,7 +23,6 @@ class HashMap
     if length > (@@load_factor * @@capacity)
       @@capacity *= 2
       entries_array = entries
-      # clear
       @@hasharray = Array.new(@@capacity).map { |val| val = [] }
       entries_array.each do |pair|
         hash_code = hash(pair[0])
@@ -34,8 +32,6 @@ class HashMap
       puts @@hasharray
     end
   end
-
-
 
   def get(key)
     hash_code = hash(key)
@@ -72,10 +68,8 @@ class HashMap
     bucket = hash_code % @@capacity
     pairs = @@hasharray[bucket]
     pairs.each do |pair|
-      # binding.pry
       if pair[key] != nil
         return pairs.delete(pair)
-        # binding.pry
       end
     end
   end
@@ -89,10 +83,8 @@ class HashMap
         bucket.each { |pair| count += 1 }
       end
     end
-    # binding.pry
     count
   end
-
 
   def clear
     @@hasharray = @@hasharray.map { |value| value = [] }
@@ -141,35 +133,45 @@ class HashMap
       end
 
     end
-    # output = values_array.map { |ele| ele.join }
     puts "array of entries is #{entries_array}"
     entries_array
   end
 
 end
 
-test = HashMap.new
-test.set('apple', 'red')
-test.set('banana', 'yellow')
-test.set('carrot', 'orange')
-test.set('dog', 'brown') #
-test.set('elephant', 'gray')
-test.set('frog', 'green')
-test.set('grape', 'purple') #
-test.set('hat', 'black')
-test.set('ice cream', 'white')
-test.set('jacket', 'blue')
-test.set('kite', 'pink')
-test.set('lion', 'golden')
-puts test.get("lion")
-puts test.has?("lion")
-puts "filled buckets is now:"
-puts test.length
-# puts test.remove("lion")
+# test = HashMap.new
+# test.set('apple', 'red')
+# test.set('banana', 'yellow')
+# test.set('carrot', 'orange')
+# test.set('dog', 'brown') #
+# test.set('elephant', 'gray')
+# test.set('frog', 'green')
+# test.set('grape', 'purple') #
+# test.set('hat', 'black')
+# test.set('ice cream', 'white')
+# test.set('jacket', 'blue')
+# test.set('kite', 'pink')
+# test.set('lion', 'golden')
+# puts test.get("lion")
+# puts test.has?("lion")
+# puts "filled buckets is now:"
 # puts test.length
-# test.clear
-test.keys
-test.values
-test.entries
-binding.pry
-test.set('moon', 'silver')
+# # puts test.remove("lion")
+# # puts test.length
+# # test.clear
+# test.keys
+# test.values
+# test.entries
+# binding.pry
+# test.set('moon', 'silver')
+# binding.pry
+# puts "The length is now:"
+# puts test.length
+# puts test.get('moon')
+# puts test.has?('hat')
+# puts test.remove('jacket')
+# puts "the length is now:"
+# puts test.length
+# test.keys
+# test.values
+# test.entries
